@@ -48,5 +48,41 @@ while (restartGame){
     attempts = parseInt(prompt(enterNumText));
   }
 
+  // Asks user to enter a guess in the range that they set
+  guess = prompt(`Please enter a guess from 1 to ${rangeNum}. You have ${attempts} attempt(s) left:`);
+
+  // Continues looping until the user guesses the correct number or runs out of attempts (NOTE: Loops until a BREAK keyword is run)
+  while (true){
+    // Attempts to convert the user's guess into a number
+    guess = parseInt(guess);
+
+    // Verifies the user's guess is a number greater than zero as well as a number within the range set by the user
+    while (!guess || guess < 1 || guess > rangeNum){
+      guess = parseInt(prompt(`Please enter a number from 1 to ${rangeNum}`));
+    }
+
+    // Removes an attempt
+    attempts--;
+
+    // Checks if the user guessed correctly. If so, the game ends (NOTE: The BREAK ends the loop)
+    if (guess === randomNum){
+      alert(`CONGRATULATIONS YOU GUESSED THE CORRECT NUMBER: ${randomNum}`);
+      break;
+
+      // Checks if user has any attempts left. If not, then the game ends and the number is displayed to the user.
+    } else if (attempts === 0){
+      alert(`Sorry, but you have run out of attempts :(. The number was ${randomNum}`);
+      break;
+
+      // Checks if user's guess was too low and prompts user to guess again if that is the case
+    } else if (guess < randomNum){
+      guess = prompt(`Too low. You have ${attempts} attempt(s) left`);
+
+      // The only other possibility is that the user's guess was too high so the user is prompted to guess again
+    } else {
+      guess = prompt(`Too high. You have ${attempts} attempt(s) left`);
+    }
+  }
+
   break;
 }
